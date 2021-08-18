@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Genre(models.Model):
@@ -19,9 +20,15 @@ class Producer(models.Model):
 class Movie(models.Model):
     name = models.CharField('Название фильма', max_length=64)
     producer = models.ForeignKey('Producer', on_delete=models.SET_NULL, null=True)
-    release_date = models.DateField('дата выхода', null=True, blank=True)
+
     description = models.CharField('описание', max_length=1024)
     genre = models.ManyToManyField(Genre)
+
+    YEAR_CHOICES = []
+    for year in range(1950, (datetime.now().year + 5)):
+        YEAR_CHOICES.append((year, year))
+
+    release_date = models.IntegerField('год выхода', choices=YEAR_CHOICES, default=2000, blank=True)
 
     def __str__(self):
         return f"{self.name}, {self.release_date}"
