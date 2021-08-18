@@ -34,6 +34,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ movie.name }}</h5>
                 <p class="card-text">{{ movie.producer }}</p>
+                <p class="card-text">{% for genre in movie.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %} {% endfor %}</p>
                 <p class="card-text">{{ movie.release_date }}</p>
               </div>
             </div>
