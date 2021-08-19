@@ -1,7 +1,22 @@
 from django.shortcuts import render
-from .models import Movie
+from django.views.generic import TemplateView, ListView, DetailView
+from .models import Movie, Director
 
 
-def index(request):
-    movies = Movie.objects.all()
-    return render(request, 'core/index.html', {'movie_list': movies})
+class HomeView(TemplateView):
+    template_name = 'core/index.html'
+
+
+class MovieListView(ListView):
+    model = Movie
+    template_name = 'core/movies.html'
+
+
+class MovieDetailView(DetailView):
+    model = Movie
+    template_name = 'core/movie_detail.html'
+
+
+class DirectorDetailView(DetailView):
+    model = Director
+    template_name = 'core/director_detail.html'

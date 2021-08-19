@@ -12,7 +12,7 @@
     <title>Тестовый проект</title>
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link active"  href="{% url 'core:home' %}">Домой</a>
@@ -25,15 +25,17 @@
             </li>
           </ul>
       </nav>
-
       <div>
         <div class="card">
           <div class="card-body">
-            <h1>Сайт с данными о фильмах и сериалах</h1>
+            <h1>{{ movie.name }}</h1>
+            <p>Жанр: {% for genre in movie.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %} {% endfor %}</p>
+            <p>Режиссер: {{ movie.director }}</p>
+            <p>Описание: {{ movie.description }}</p>
+            <p>{{ movie.release_date }}</p>
           </div>
         </div>
       </div>
-
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   </body>
 </html>

@@ -29,7 +29,11 @@
       <div>
         <div class="card">
           <div class="card-body">
-            <h1>Сайт с данными о фильмах и сериалах</h1>
+            <h1>{{ director.first_name }} {{ director.last_name }}</h1>
+            <p>Дата рождения: {{ director.date_of_birth }}</p>
+            {% if director.date_of_death %} Дата смерти: {{director.date_of_death}}{% endif %}
+            <p>Страна: {{ director.country }}</p>
+            <p>{{ director.biography }}</p>
           </div>
         </div>
       </div>
