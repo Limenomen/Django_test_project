@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Movie, Director
+from core.models import Movie, Director
 
 
 class HomeView(TemplateView):

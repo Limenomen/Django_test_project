@@ -21,6 +21,18 @@ class Director(models.Model):
         return f"{self.first_name}, {self.last_name}"
 
 
+class Actor(models.Model):
+    first_name = models.CharField('имя актера', max_length=64)
+    last_name = models.CharField('фамилия актера', max_length=64)
+    date_of_birth = models.DateField('дата рождения', null=True, blank=True)
+    date_of_death = models.DateField('дата смерти', null=True, blank=True)
+    country = models.CharField('страна', max_length=32, null=True, blank=True)
+    biography = models.CharField('биография', max_length=4096, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.first_name}, {self.last_name}"
+
+
 class Movie(models.Model):
     name = models.CharField('Название фильма', max_length=64)
     director = models.ForeignKey('Director', on_delete=models.SET_NULL, null=True)
@@ -28,9 +40,9 @@ class Movie(models.Model):
     description = models.CharField('описание', max_length=4096)
     genre = models.ManyToManyField(Genre)
 
-    YEAR_CHOICES = []
-    for year in range(1950, (datetime.now().year + 5)):
-        YEAR_CHOICES.append((year, year))
+    actors = models.ManyToManyField(Actor)
+
+    YEAR_CHOICES = [(year, year) for year in range(1950, (datetime.now().year + 5))]
 
     release_date = models.IntegerField('год выхода', choices=YEAR_CHOICES, default=2000, blank=True)
 
@@ -39,4 +51,6 @@ class Movie(models.Model):
 
     def display_genre(self):
         return ', '.join([genre.name for genre in self.genre.all()])
+
+
 
