@@ -1,43 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <style>
-      .tab {
-      margin-top: 2%
-      }
-    </style>
-    <title>Тестовый проект</title>
-  </head>
-  <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link active"  href="{% url 'core:home' %}">Домой</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'core:movies'%}">Кино</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/admin/">Admin</a>
-            </li>
-          </ul>
-      </nav>
-
-      <div>
-        <div class="card">
-          <div class="card-body">
+{% extends 'core/index.html' %}
+{% block content %}
+<div>
+    <div class="card">
+        <div class="card-body">
             <h1>{{ director.first_name }} {{ director.last_name }}</h1>
             <p>Дата рождения: {{ director.date_of_birth }}</p>
             {% if director.date_of_death %} Дата смерти: {{director.date_of_death}}{% endif %}
             <p>Страна: {{ director.country }}</p>
             <p>{{ director.biography }}</p>
-          </div>
         </div>
-      </div>
-
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-  </body>
-</html>
+    </div>
+</div>
+{% endblock %}
