@@ -1,0 +1,22 @@
+{% extends 'core/index.html' %}
+{% block searchbar %}
+    {% include 'core/search_include.html' %}
+{% endblock %}
+{% block content %}
+<p class="tab"></p>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for director in director_list %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'core:director_detail' director.pk %}">{{ director.first_name }} {{ director.last_name }}</a></h5>
+                    <p class="card-text">{{ director.country }}</p>
+                    <p>Фильмов: {{ director.movie_set.all.count }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
