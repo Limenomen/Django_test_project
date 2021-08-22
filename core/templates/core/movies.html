@@ -1,19 +1,11 @@
 {% extends 'core/index.html' %}
 
 {% block searchbar %}
-<li class="nav-item">
-    <form method="get">
-        <div class="input-group rounded">
-            <input aria-describedby="search-addon" aria-label="Search" class="form-control rounded"
-                   placeholder="Поиск по странице"
-                   name="name"
-                   value="{{ request.GET.name }}"
-                   type="text"/>
-            <button class="btn btn-outline-primary" type="submit">поиск</button>
-        </div>
-    </form>
-</li>
+
+    {% include 'core/search_include.html' %}
+
 {% endblock %}
+
 {% block content %}
 <p class="tab"></p>
 <div class="container">

@@ -8,6 +8,23 @@
             {% if director.date_of_death %} Дата смерти: {{director.date_of_death}}{% endif %}
             <p>Страна: {{ director.country }}</p>
             <p>{{ director.biography }}</p>
+
+            <h3>Фильмография</h3>
+
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                {% for movie in director.movie_set.all %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'core:movie_detail' movie.pk %}">{{ movie.name }}</a>
+                            </h5>
+                            <p class="card-text">{{ movie.display_genre }}</p>
+                            <p class="card-text">{{ movie.release_date }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

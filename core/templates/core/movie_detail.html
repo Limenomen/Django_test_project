@@ -5,7 +5,7 @@
         <div class="card-body">
             <h1>{{ movie.name }}</h1>
             <p>Жанр: {{ movie.display_genre }}</p>
-            <p>Режиссер: {{ movie.director }}</p>
+            <p>Режиссер: <a href="{% url 'core:director_detail' movie.director.pk %}">{{ movie.director }}</a></p>
             <p>Описание: {{ movie.description }}</p>
             <p>{{ movie.release_date }}</p>
         </div>
