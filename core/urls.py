@@ -7,5 +7,6 @@ urlpatterns = [
     path('', core.views.HomeView.as_view(), name='home'),
     path('movies/', core.views.MovieListView.as_view(), name='movies'),
     path('movies/<int:pk>/', core.views.MovieDetailView.as_view(), name='movie_detail'),
-    path('director/<int:pk>/', core.views.DirectorDetailView.as_view(), name='director_detail'),
+    path('directors/', core.views.DirectorListView.as_view(), name='directors'),
+    path('directors/<int:pk>/', core.views.DirectorDetailView.as_view(), name='director_detail'),
 ]
