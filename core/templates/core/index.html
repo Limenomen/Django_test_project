@@ -8,37 +8,57 @@
       .tab {
       margin-top: 2%
       }
+      .navbar {
+        padding: .5rem 1rem;
+        padding-top: 0.5rem;
+        padding-right: 1rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        }
 
     </style>
-    <title>Тестовый проект</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            {% with request.resolver_match.url_name as url_name %}
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'core:home' %}">Домой</a>
+                <a class="nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'core:home' %}">Домой</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'core:movies'%}">Кино</a>
+                <a class="nav-link {% if url_name == 'movies' %}active{% endif %}" href="{% url 'core:movies'%}">Кино</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if url_name == 'directors' %}active{% endif %}" href="{% url 'core:directors'%}">Режиссеры</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/admin/">Admin</a>
             </li>
-            {% block searchbar %}
-            {% endblock %}
+            {% endwith %}
         </ul>
-    </nav>
+    </div>
+    {% block searchbar %}{% endblock %}
+</nav>
 
-    {% block content %}
-    <div>
-        <div class="card">
-            <div class="card-body">
-                <h1>Про кино</h1>
-            </div>
+
+{% block content %}
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h1>Про кино</h1>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
 
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
 </html>
