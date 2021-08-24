@@ -13,3 +13,13 @@ class MovieFilter(FilterSet):
     class Meta:
         model = models.Movie
         fields = ['name', 'release_date', 'genre', 'director']
+
+
+class DirectorFilter(FilterSet):
+    first_name = django_filters.CharFilter(lookup_expr='icontains')
+    last_name = django_filters.CharFilter(lookup_expr='icontains')
+    country = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = models.Director
+        fields = ['first_name', 'last_name', 'country']

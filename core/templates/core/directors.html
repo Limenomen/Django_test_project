@@ -1,7 +1,5 @@
 {% extends 'core/index.html' %}
-{% block searchbar %}
-    {% include 'core/search_include.html' %}
-{% endblock %}
+
 {% block content %}
 <p class="tab"></p>
 <div class="container">
@@ -19,4 +17,7 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+{% block sidebar %}
+    {% include 'core/search_sidebar_form.html' %}
 {% endblock %}
