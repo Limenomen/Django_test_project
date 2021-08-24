@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from core.models import Movie, Director
 from django.db.models import Q, Count
-
+import core.forms
 
 class TittleMixin:
 
@@ -26,6 +26,11 @@ class MovieListView(TittleMixin, ListView):
     title = 'Фильмы'
     model = Movie
     template_name = 'core/movies.html'
+
+    def get_context_data(self, **kwargs):
+        c = super().get_context_data()
+        c['form'] = core.forms.MovieSearch()
+        return c
 
     def get_queryset(self):
         queryset = self.model.objects.all()
@@ -55,7 +60,6 @@ class DirectorListView(TittleMixin, ListView):
     model = Director
     title = 'Режиссеры'
     template_name = 'core/directors.html'
-
 
     def get_queryset(self):
         queryset = self.model.objects.all()
