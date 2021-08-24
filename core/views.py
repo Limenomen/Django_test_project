@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from core.models import Movie, Director
 from django.db.models import Q, Count
 import core.forms
+import core.filters
 
 class TittleMixin:
 
@@ -27,17 +28,16 @@ class MovieListView(TittleMixin, ListView):
     model = Movie
     template_name = 'core/movies.html'
 
+    def get_filters(self):
+        return core.filters.MovieFilter(self.request.GET)
+
     def get_context_data(self, **kwargs):
         c = super().get_context_data()
-        c['form'] = core.forms.MovieSearch()
+        c['form'] = core.forms.MovieSearch(self.request.GET or None)
         return c
 
     def get_queryset(self):
-        queryset = self.model.objects.all()
-        name = self.request.GET.get('name')
-        if name:
-            queryset = queryset.filter(name__istartswith=name)
-        return queryset
+        return self.get_filters().qs
 
 
 class MovieDetailView(TittleMixin, DetailView):
