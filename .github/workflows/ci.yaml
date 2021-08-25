@@ -24,5 +24,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        #coverage run --source='core/tests' --omit='*migrations*,*tests*' manage.py test -v 2 core && coverage report
-        coverage run manage.py test core.tests.test_models && coverage report
+
+        coverage run manage.py test core.tests.test_models
+        coverage report
