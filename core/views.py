@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, DeleteView, CreateView, UpdateView
 from core.models import Movie, Director
-from django.db.models import Q, Count
+from django.urls import reverse
 import core.forms
 import core.filters
 
@@ -72,3 +72,63 @@ class DirectorListView(TittleMixin, ListView):
 
     def get_queryset(self):
         return self.get_filters().qs
+
+
+class MovieDeleteView(TittleMixin, DeleteView):
+    model = Movie
+
+    def get_title(self) -> str:
+        return 'Удаление: ' + str(self.get_object())
+
+    def get_success_url(self):
+        return reverse('core:movies')
+
+
+class DirectorDeleteView(TittleMixin, DeleteView):
+    model = Director
+
+    def get_title(self) -> str:
+        return 'Удаление: ' + str(self.get_object())
+
+    def get_success_url(self):
+        return reverse('core:directors')
+
+
+class MovieCreateView(TittleMixin, CreateView):
+    model = Movie
+    fields = '__all__'
+    title = 'Добавление фильма'
+
+    def get_success_url(self):
+        return reverse('core:movies')
+
+
+class MovieUpdateView(TittleMixin, UpdateView):
+    model = Movie
+    fields = '__all__'
+
+    def get_title(self) -> str:
+        return 'Изменение: ' + str(self.get_object())
+
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()
+
+
+class DirectorCreateView(TittleMixin, CreateView):
+    model = Director
+    fields = '__all__'
+    title = 'Добавление режиссера'
+
+    def get_success_url(self):
+        return reverse('core:directors')
+
+
+class DirectorUpdateView(TittleMixin, UpdateView):
+    model = Director
+    fields = '__all__'
+
+    def get_title(self) -> str:
+        return 'Изменение: ' + str(self.get_object())
+
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()

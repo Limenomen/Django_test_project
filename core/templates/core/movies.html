@@ -1,27 +1,39 @@
 {% extends 'core/index.html' %}
 
-
 {% block content %}
 <p class="tab"></p>
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-5">
         {% for movie in movie_list %}
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'core:movie_detail' movie.pk %}">{{ movie.name }}</a></h5>
-                    <p class="card-text"><a href="{% url 'core:director_detail' movie.director.pk %}">{{ movie.director }}</a></p>
-                    <p class="card-text">{{ movie.display_genre }}</p>
-                    <p class="card-text">{{ movie.release_date }}</p>
+                    <button aria-label="Close" class="btn-close"
+                            onclick="location.href='{% url 'core:movie_delete' movie.pk%}'"
+                            type="button" style="float: right;"></button>
+                    <a href="{% url 'core:movie_detail' movie.pk %}">
+                        <h5 class="card-title">{{ movie.name }}</h5>
+                        <p class="card-text"><a href="{% url 'core:director_detail' movie.director.pk %}">{{ movie.director }}</a></p>
+                        <p class="card-text">{{ movie.display_genre }}</p>
+                        <p class="card-text">{{ movie.release_date }}</p>
+                    </a>
                 </div>
             </div>
         </div>
         {% endfor %}
+        <div class="col">
+            <a href="{% url 'core:movie_create' %}" style="text-decoration: none">
+                <div class="card">
+                    <div align="center" class="card-body">
+                        <h1 class="card-title">+</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block sidebar %}
-    {% include 'core/search_sidebar_form.html' %}
+{% include 'core/search_sidebar_form.html' %}
 {% endblock %}

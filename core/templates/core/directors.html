@@ -8,6 +8,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
+                    <button aria-label="Close" class="btn-close"
+                            onclick="location.href='{% url 'core:director_delete' director.pk%}'"
+                            type="button" style="float: right;"></button>
                     <h5 class="card-title"><a href="{% url 'core:director_detail' director.pk %}">{{ director.first_name }} {{ director.last_name }}</a></h5>
                     <p class="card-text">{{ director.country }}</p>
                     <p>Фильмов: {{ director.movie_set.all.count }}</p>
@@ -15,6 +18,15 @@
             </div>
         </div>
         {% endfor %}
+        <div class="col">
+            <a href="{% url 'core:director_create' %}" style="text-decoration: none">
+                <div class="card">
+                    <div align="center" class="card-body">
+                        <h1 class="card-title">+</h1>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.urls import reverse
 
 
 class Genre(models.Model):
@@ -21,6 +22,9 @@ class Director(models.Model):
     def __str__(self):
         return f"{self.first_name}, {self.last_name}"
 
+    def get_absolute_url(self):
+        return reverse('core:director_detail', args=[str(self.pk)])
+
 
 class Movie(models.Model):
     name = models.CharField('Название фильма', max_length=64)
@@ -37,3 +41,6 @@ class Movie(models.Model):
 
     def display_genre(self):
         return ', '.join([genre.name for genre in self.genre.all()])
+
+    def get_absolute_url(self):
+        return reverse('core:movie_detail', args=[str(self.pk)])
