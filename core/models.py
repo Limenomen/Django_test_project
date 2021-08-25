@@ -29,7 +29,7 @@ class Director(models.Model):
 class Movie(models.Model):
     name = models.CharField('Название фильма', max_length=64)
     director = models.ForeignKey('Director', on_delete=models.SET_NULL, null=True)
-    description = models.TextField('описание', max_length=4096)
+    description = models.TextField('описание', max_length=4096, blank=True)
     genre = models.ManyToManyField(Genre)
     image = models.ImageField('Изображение', upload_to='media/movies/', blank=True)
 
