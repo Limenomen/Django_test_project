@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from core import models
 
 
@@ -25,13 +25,13 @@ class MovieModel(TestCase):
         self.movie.genre.set([self.genre1, self.genre2])
 
     def test_display_genre(self):
-        self.assertEquals(self.movie.display_genre(), 'genre1, genre2')
+        self.assertEqual(self.movie.display_genre(), 'genre1, genre2')
 
     def test_str(self):
-        self.assertEquals(
+        self.assertEqual(
             str(self.movie),
             f'{self.movie.name}, {self.movie.release_date}'
         )
 
     def test_get_absolute_url(self):
-        self.assertEquals(self.movie.get_absolute_url(), f'/movies/{self.movie.pk}/')
+        self.assertEqual(self.movie.get_absolute_url(), f'/movies/{self.movie.pk}/')
