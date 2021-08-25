@@ -25,5 +25,5 @@ jobs:
     - name: Run Tests
       run: |
 
-        coverage run manage.py test core.tests.test_models
-        coverage report
+        coverage run --source='core/tests' manage.py test -v 2 core/tests && coverage report
+
