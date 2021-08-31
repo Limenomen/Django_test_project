@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 import core.views
 
 app_name = 'core'

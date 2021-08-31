@@ -45,10 +45,12 @@
             {% endwith %}
         </ul>
     </div>
-    {% block navbar_right_side %}{% endblock %}
+    {% block navbar_right_side %}
+    <a href="{% url 'accounts:login' %}">Войти</a>
+    {% endblock %}
 </nav>
 <div style="height: 100%; width: 100%">
-    <div class="flexbox-container" style="display:flex;">,
+    <div class="flexbox-container" style="display:flex;">
 
         <div class="main" style="flex:1;">
             {% block content %}
