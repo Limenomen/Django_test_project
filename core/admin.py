@@ -1,5 +1,6 @@
 from django.contrib import admin
-import core.models as models
+import core.models
+import accounts.models
 
 
 class DirectorAdmin(admin.ModelAdmin):
@@ -11,6 +12,8 @@ class MoviesAdmin(admin.ModelAdmin):
     list_display = ('name', 'release_date', 'director')
 
 
-admin.site.register(models.Genre)
-admin.site.register(models.Movie, MoviesAdmin)
-admin.site.register(models.Director, DirectorAdmin)
+admin.site.register(core.models.Genre)
+admin.site.register(core.models.Movie, MoviesAdmin)
+admin.site.register(core.models.Director, DirectorAdmin)
+
+admin.site.register(accounts.models.Profile)

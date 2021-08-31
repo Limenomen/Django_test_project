@@ -1,0 +1,51 @@
+{% extends 'core/index.html' %}
+{% block content %}
+<div>
+    <div class="card">
+        <div class="card-body">
+            <button class="btn btn-outline-primary"
+                    onclick="location.href=''" type="button"
+                    style="float: right;">изменить
+            </button>
+            <h1>{{ user }}</h1>
+            <p>Имя: {{ user.first_name }}</p>
+            <p>Фамилия: {{ user.last_name }}</p>
+            <p>Дата рождения: {{ user.profile.date_of_birth }}</p>
+            <p>Email: {{ user.email }}</p>
+
+            <h3>Любимые фильмы:</h3>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                {% for movie in user.profile.favorite_movies_set.all %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'core:movie_detail' movie.pk %}">{{ movie.name }}</a>
+                            </h5>
+                            <p class="card-text">{{ movie.display_genre }}</p>
+                            <p class="card-text">{{ movie.release_date }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <h3>Любимые режиссеры:</h3>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                {% for director in user.profile.favorite_directors_set.all %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <button aria-label="Close" class="btn-close"
+                                    onclick="location.href='{% url 'core:director_delete' director.pk%}'"
+                                    type="button" style="float: right;"></button>
+                            <h5 class="card-title"><a href="{% url 'core:director_detail' director.pk %}">{{ director.first_name }} {{ director.last_name }}</a></h5>
+                            <p class="card-text">{{ director.country }}</p>
+                            <p>Фильмов: {{ director.movie_set.all.count }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

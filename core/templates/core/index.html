@@ -46,7 +46,7 @@
         </ul>
     </div>
     {% block navbar_right_side %}
-    <a href="{% url 'accounts:login' %}">Войти</a>
+        {% include 'accounts/navbar_login_display.html' %}
     {% endblock %}
 </nav>
 <div style="height: 100%; width: 100%">
