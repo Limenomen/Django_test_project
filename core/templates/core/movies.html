@@ -1,12 +1,15 @@
 {% extends 'core/index.html' %}
-
 {% block content %}
+<style>
+    .gallery5 img { width: 150px; height: 150px; object-fit: cover; }
+</style>
 <p class="tab"></p>
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-5">
+    <div class="row row-cols-1 row-cols-md-4 g-5">
         {% for movie in movie_list %}
         <div class="col">
-            <div class="card">
+            <div class="card" style="width: 18rem; height: 22rem">
+                <img class="card-img-top" src="{{ movie.image.url }}" style="width: 18rem; height: 10rem; object-fit: cover;">
                 <div class="card-body">
                     <button aria-label="Close" class="btn-close"
                             onclick="location.href='{% url 'core:movie_delete' movie.pk%}'"

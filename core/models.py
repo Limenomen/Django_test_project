@@ -17,7 +17,7 @@ class Director(models.Model):
     date_of_death = models.DateField('дата смерти', null=True, blank=True)
     country = models.CharField('страна', max_length=32, null=True, blank=True)
     biography = models.TextField('биография', max_length=4096, null=True, blank=True)
-    image = models.ImageField('Изображение', upload_to='media/directors/', blank=True)
+    image = models.ImageField('Изображение', upload_to='directors/', blank=True)
 
     def __str__(self):
         return f"{self.first_name}, {self.last_name}"
@@ -31,7 +31,7 @@ class Movie(models.Model):
     director = models.ForeignKey('Director', on_delete=models.SET_NULL, null=True)
     description = models.TextField('описание', max_length=4096, blank=True)
     genre = models.ManyToManyField(Genre)
-    image = models.ImageField('Изображение', upload_to='media/movies/', blank=True)
+    image = models.ImageField('Изображение', upload_to='movies/', blank=True)
 
     YEAR_CHOICES = [(year, year) for year in range(1950, (datetime.now().year + 5))]
     release_date = models.IntegerField('год выхода', choices=YEAR_CHOICES, default=2000, blank=True)
