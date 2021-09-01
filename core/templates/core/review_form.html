@@ -1,0 +1,8 @@
+{% load bootstrap5 %}
+<form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">готово</button>
+        {% endbuttons %}
+    </form>

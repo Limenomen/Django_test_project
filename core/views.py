@@ -1,13 +1,11 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, DeleteView, CreateView, UpdateView
-from core.models import Movie, Director
+from core.models import Movie, Director, MovieReview
 from django.urls import reverse
 import core.forms
 import core.filters
 
 
 class TittleMixin:
-
     title: str = None
 
     def get_title(self) -> str:
@@ -132,3 +130,18 @@ class DirectorUpdateView(TittleMixin, UpdateView):
 
     def get_success_url(self):
         return self.get_object().get_absolute_url()
+
+
+class AddReview(CreateView):
+    model = MovieReview
+    template_name = 'core/review_form.html'
+    fields = ['review']
+    movie = None
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        self.movie = form.instance.movie = Movie.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.movie.get_absolute_url()

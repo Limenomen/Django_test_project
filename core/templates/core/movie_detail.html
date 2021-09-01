@@ -14,5 +14,7 @@
             <p>{{ movie.release_date }}</p>
         </div>
     </div>
+    <a href=" {% url 'core:movie_add_review' movie.pk %}">добавить рецензию</a>
+
 </div>
 {% endblock %}
