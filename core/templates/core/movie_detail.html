@@ -4,7 +4,9 @@
 <div>
     <div class="card">
         <div class="card-body">
+            {% if user.is_stuff or user.is_superuser%}
             <button class="btn btn-outline-primary" onclick="location.href='{% url 'core:movie_update' movie.pk %}'" type="button" style="float: right;">изменить</button>
+            {% endif %}
             <h1>{{ movie.name }}</h1>
             <p>Жанр: {{ movie.display_genre }}</p>
             <p>Режиссер: <a href="{% url 'core:director_detail' movie.director.pk %}">{{ movie.director }}</a></p>

@@ -39,9 +39,11 @@
             <li class="nav-item">
                 <a class="nav-link {% if url_name == 'directors' %}active{% endif %}" href="{% url 'core:directors'%}">Режиссеры</a>
             </li>
+            {% if user.is_stuff or user.is_superuser%}
             <li class="nav-item">
                 <a class="nav-link" href="/admin/">Admin</a>
             </li>
+            {% endif %}
             {% endwith %}
         </ul>
     </div>

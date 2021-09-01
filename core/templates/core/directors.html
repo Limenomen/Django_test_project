@@ -19,6 +19,7 @@
             </div>
         </div>
         {% endfor %}
+        {% if user.is_stuff or user.is_superuser%}
         <div class="col">
             <a href="{% url 'core:director_create' %}" style="text-decoration: none">
                 <div class="card">
@@ -28,6 +29,7 @@
                 </div>
             </a>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
