@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -44,3 +45,12 @@ class Movie(models.Model):
 
     def get_absolute_url(self):
         return reverse('core:movie_detail', args=[str(self.pk)])
+
+
+class MovieReview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
+    review = models.TextField('рецензия', max_length=4096)
+
+    def __str__(self):
+        return self.review

@@ -14,5 +14,5 @@ class MoviesAdmin(admin.ModelAdmin):
 admin.site.register(core.models.Genre)
 admin.site.register(core.models.Movie, MoviesAdmin)
 admin.site.register(core.models.Director, DirectorAdmin)
-
+admin.site.register(core.models.MovieReview)
 admin.site.register(accounts.models.Profile)
