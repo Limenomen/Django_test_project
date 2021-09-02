@@ -7,7 +7,9 @@
         {% for director in director_list %}
         <div class="col">
             <div class="card" style="width: 18rem; height: 22rem">
+                {% if director.image %}
                 <img class="card-img-top" src="{{ director.image.url }}" style="width: 18rem; height: 10rem; object-fit: cover;">
+                {% endif %}
                 <div class="card-body">
                     <button aria-label="Close" class="btn-close"
                             onclick="location.href='{% url 'core:director_delete' director.pk%}'"

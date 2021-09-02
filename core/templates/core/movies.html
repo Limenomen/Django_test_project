@@ -6,7 +6,9 @@
         {% for movie in movie_list %}
         <div class="col">
             <div class="card" style="width: 18rem; height: 22rem">
+                {% if movie.image %}
                 <img class="card-img-top" src="{{ movie.image.url }}" style="width: 18rem; height: 10rem; object-fit: cover;">
+                {% endif %}
                 <div class="card-body">
                     <button aria-label="Close" class="btn-close"
                             onclick="location.href='{% url 'core:movie_delete' movie.pk%}'"

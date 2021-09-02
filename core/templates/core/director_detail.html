@@ -3,7 +3,9 @@
 <div>
     <div class="card">
         <div class="card-body">
+            {% if director.image %}
              <img class="card-img-top" src="{{ director.image.url }}" style="width: 24rem; height: 24rem; object-fit: cover;">
+            {% endif %}
             {% if user.is_stuff or user.is_superuser%}
             <button class="btn btn-outline-primary"
                     onclick="location.href='{% url 'core:director_update' director.pk %}'" type="button"
