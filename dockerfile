@@ -1,6 +1,6 @@
 FROM python:3.9
 
-RUN apt update; apt install -y npm
+RUN apt update; apt install -y supervisor vim npm
 
 ADD requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt; rm /tmp/requirements.txt

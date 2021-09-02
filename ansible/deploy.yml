@@ -71,7 +71,7 @@
   - name: Collect static
     shell: docker exec -i test-project bash -c "python3 ./manage.py collectstatic --noinput"
 
-  - name: Copy npm packegs
+  - name: Copy npm packages
     shell: docker exec -i test-project bash -c "rm -rf static/node_modules; mv node_modules static/"
 
 
