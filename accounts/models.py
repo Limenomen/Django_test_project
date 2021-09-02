@@ -22,10 +22,3 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-
-'''
-class UserCompilation(models.Model):
-    user = models.ForeignKey('User', on_delete=models.SET_NULL)
-    movie = models.ManyToManyField(Movie)
-'''

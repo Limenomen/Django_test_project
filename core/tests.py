@@ -21,6 +21,8 @@ class MovieSearch(TestCase):
             list(response.context['object_list']),
             list(models.Movie.objects.all()),
         )
+
+
 class DirectorModel(TestCase):
     def setUp(self):
         self.director = models.Director.objects.create(first_name='first_name', last_name='last_name')

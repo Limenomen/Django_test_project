@@ -3,17 +3,19 @@
 <div>
     <div class="card">
         <div class="card-body">
+             <img class="card-img-top" src="{{ director.image.url }}" style="width: 24rem; height: 24rem; object-fit: cover;">
             {% if user.is_stuff or user.is_superuser%}
-            <button class="btn btn-outline-primary" onclick="location.href='{% url 'core:director_update' director.pk %}'" type="button" style="float: right;">изменить</button>
+            <button class="btn btn-outline-primary"
+                    onclick="location.href='{% url 'core:director_update' director.pk %}'" type="button"
+                    style="float: right;">изменить
+            </button>
             {% endif %}
             <h1>{{ director.first_name }} {{ director.last_name }}</h1>
             <p>Дата рождения: {{ director.date_of_birth }}</p>
             {% if director.date_of_death %} Дата смерти: {{director.date_of_death}}{% endif %}
             <p>Страна: {{ director.country }}</p>
             <p>{{ director.biography }}</p>
-
             <h3>Фильмография</h3>
-
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 {% for movie in director.movie_set.all %}
                 <div class="col">
