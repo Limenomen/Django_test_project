@@ -8,11 +8,15 @@ RUN pip install -r /tmp/requirements.txt; rm /tmp/requirements.txt
 COPY . /opt/app
 WORKDIR /opt/app
 
-EXPOSE 8000
+EXPOSE 80
+ENV PYTHONUNBUFFERED 1
+
+COPY supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY supervisor/app.conf /etc/supervisor/conf.d/app.conf
 
 VOLUME /data/
-ENV DB_PATH '/data/db.sqlite3'
+VOLUME /static/
+VOLUME /media/
 
-CMD npm install; \
-    python ./manage.py migrate; \
-    python ./manage.py runserver 0.0.0.0:8000
+CMD  rm -rf static; ln -s /static static; \
+     /usr/bin/supervisord -c /etc/supervisor/supervisord.conf --nodaemon
