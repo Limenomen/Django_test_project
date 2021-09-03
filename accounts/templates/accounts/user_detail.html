@@ -7,6 +7,9 @@
                     onclick="location.href=''" type="button"
                     style="float: right;">изменить
             </button>
+            {% if user.profile.image %}
+             <img class="card-img-top" src="{{ user.profile.image.url }}" style="width: 15rem; height: 15rem; object-fit: cover;">
+            {% endif %}
             <h1>{{ user }}</h1>
             <p>Имя: {{ user.first_name }}</p>
             <p>Фамилия: {{ user.last_name }}</p>
@@ -15,7 +18,7 @@
 
             <h3>Любимые фильмы:</h3>
             <div class="row row-cols-2 row-cols-md-4 g-4">
-                {% for movie in user.profile.favorite_movies_set.all %}
+                {% for movie in user.profile.favorite_movies.all %}
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
@@ -30,7 +33,7 @@
             </div>
             <h3>Любимые режиссеры:</h3>
             <div class="row row-cols-2 row-cols-md-4 g-4">
-                {% for director in user.profile.favorite_directors_set.all %}
+                {% for director in user.profile.favorite_directors.all %}
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
