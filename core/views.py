@@ -132,8 +132,9 @@ class DirectorUpdateView(TittleMixin, UpdateView):
         return self.get_object().get_absolute_url()
 
 
-class AddReview(CreateView):
+class AddReview(TittleMixin, CreateView):
     model = MovieReview
+    title = 'добавление рецензии'
     template_name = 'core/review_form.html'
     fields = ['review']
     movie = None

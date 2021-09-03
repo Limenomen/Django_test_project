@@ -4,7 +4,20 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
-class UserLoginView(LoginView):
+class TittleMixin:
+    title: str = None
+
+    def get_title(self) -> str:
+        return self.title
+
+    def get_context_data(self, **kwargs):
+        c = super().get_context_data()
+        c['title'] = self.get_title()
+        return c
+
+
+class UserLoginView(TittleMixin, LoginView):
+    title = 'Войти'
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
@@ -15,6 +28,7 @@ class UserLogoutView(LogoutView):
     next_page = 'core:home'
 
 
-class UserDetailView(DetailView):
+class UserDetailView(TittleMixin, DetailView):
+    title = 'Профиль'
     model = User
     template_name = 'accounts/user_detail.html'
