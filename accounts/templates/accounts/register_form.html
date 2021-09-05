@@ -1,0 +1,10 @@
+{% extends 'core/index.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<div style="width: 50%; margin: 1rem">
+    <form method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Регистрация">
+    </form>
+</div>
+{% endblock %}
