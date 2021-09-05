@@ -18,5 +18,5 @@ VOLUME /data/
 VOLUME /static/
 VOLUME /media/
 
-CMD  rm -rf static; ln -s /static static; \
+CMD  rm -rf static; ln -s /static static; ln -s /media media; \
      /usr/bin/supervisord -c /etc/supervisor/supervisord.conf --nodaemon
