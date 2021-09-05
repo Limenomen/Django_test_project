@@ -11,9 +11,11 @@
                 <img class="card-img-top" src="{{ director.image.url }}" style="width: 18rem; height: 10rem; object-fit: cover;">
                 {% endif %}
                 <div class="card-body">
+                    {% if user.is_stuff or user.is_superuser%}
                     <button aria-label="Close" class="btn-close"
                             onclick="location.href='{% url 'core:director_delete' director.pk%}'"
                             type="button" style="float: right;"></button>
+                    {% endif %}
                     <h5 class="card-title"><a href="{% url 'core:director_detail' director.pk %}">{{ director.first_name }} {{ director.last_name }}</a></h5>
                     <p class="card-text">{{ director.country }}</p>
                     <p>Фильмов: {{ director.movie_set.all.count }}</p>
