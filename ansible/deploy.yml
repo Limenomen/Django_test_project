@@ -62,6 +62,7 @@
         - 127.0.0.1:8854:80
       volumes:
         - "/var/www/test_project/static:/static"
+        - "/var/www/test_project/media:/media"
       env:
         POSTGRESQL_PASS: "{{ POSTGRES_PASSWORD }}"
 
