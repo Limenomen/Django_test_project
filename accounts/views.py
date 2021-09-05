@@ -46,7 +46,7 @@ class UserRegisterView(CreateView, TittleMixin):
         user.set_password(form.cleaned_data['password'])
         user.save()
         login(self.request, user)
-        return reverse('core:home')
+        return redirect('core:home')
 
 
 class UserDetailView(TittleMixin, DetailView):
