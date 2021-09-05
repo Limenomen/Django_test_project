@@ -85,6 +85,13 @@
       owner: www-data
       recurse: yes
 
+  - name: Set web media permissions
+      file:
+        path: /var/www/test_project/media
+        state: directory
+        owner: www-data
+        recurse: yes
+
   - name: Wait test-project start
     shell: sleep 2
 
