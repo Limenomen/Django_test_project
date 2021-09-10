@@ -1,4 +1,6 @@
+from django.shortcuts import redirect
 from django.views.generic import TemplateView, ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.contrib.auth.mixins import AccessMixin
 from core.models import Movie, Director, MovieReview
 from django.urls import reverse
 import core.forms
@@ -72,8 +74,13 @@ class DirectorListView(TittleMixin, ListView):
         return self.get_filters().qs
 
 
-class MovieDeleteView(TittleMixin, DeleteView):
+class MovieDeleteView(AccessMixin, TittleMixin, DeleteView):
     model = Movie
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect(self.get_object().get_absolute_url())
+        return super(MovieDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_title(self) -> str:
         return 'Удаление: ' + str(self.get_object())
@@ -82,8 +89,13 @@ class MovieDeleteView(TittleMixin, DeleteView):
         return reverse('core:movies')
 
 
-class DirectorDeleteView(TittleMixin, DeleteView):
+class DirectorDeleteView(AccessMixin, TittleMixin, DeleteView):
     model = Director
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect(self.get_object().get_absolute_url())
+        return super(DirectorDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_title(self) -> str:
         return 'Удаление: ' + str(self.get_object())
@@ -92,18 +104,28 @@ class DirectorDeleteView(TittleMixin, DeleteView):
         return reverse('core:directors')
 
 
-class MovieCreateView(TittleMixin, CreateView):
+class MovieCreateView(AccessMixin, TittleMixin, CreateView):
     model = Movie
     fields = '__all__'
     title = 'Добавление фильма'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('core:movies')
+        return super(MovieCreateView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('core:movies')
 
 
-class MovieUpdateView(TittleMixin, UpdateView):
+class MovieUpdateView(AccessMixin, TittleMixin, UpdateView):
     model = Movie
     fields = '__all__'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('core:movies')
+        return super(MovieUpdateView, self).dispatch(request, *args, **kwargs)
 
     def get_title(self) -> str:
         return 'Изменение: ' + str(self.get_object())
@@ -112,18 +134,28 @@ class MovieUpdateView(TittleMixin, UpdateView):
         return self.get_object().get_absolute_url()
 
 
-class DirectorCreateView(TittleMixin, CreateView):
+class DirectorCreateView(AccessMixin, TittleMixin, CreateView):
     model = Director
     fields = '__all__'
     title = 'Добавление режиссера'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('core:directors')
+        return super(DirectorCreateView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('core:directors')
 
 
-class DirectorUpdateView(TittleMixin, UpdateView):
+class DirectorUpdateView(AccessMixin, TittleMixin, UpdateView):
     model = Director
     fields = '__all__'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('core:directors')
+        return super(DirectorUpdateView, self).dispatch(request, *args, **kwargs)
 
     def get_title(self) -> str:
         return 'Изменение: ' + str(self.get_object())
